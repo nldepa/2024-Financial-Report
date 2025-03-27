@@ -2,8 +2,8 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>滿版圖片網站（支援 RWD）</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>多張圖片顯示（可滾動）</title>
     <style>
         * {
             margin: 0;
@@ -13,16 +13,26 @@
         html, body {
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            overflow-y: auto; /* 允許垂直滾動 */
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .full-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .image-container {
             width: 100%;
-            height: 100%;
-            background: url('img/pexels-pripicart-620337.jpg') no-repeat center center;
-            background-size: cover;
+            max-width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .image-container img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100vh; /* 確保圖片不超出螢幕 */
+            display: block;
+            margin-bottom: 10px; /* 圖片間距 */
         }
     </style>
     <script>
@@ -38,15 +48,20 @@
             }
         });
 
-        // 禁止手機長按圖片
+        // 防止手機長按下載圖片
         document.addEventListener("touchstart", (event) => {
-            if (event.touches.length > 1) {
+            if (event.touches.length === 1) {
                 event.preventDefault();
             }
         }, { passive: false });
     </script>
 </head>
 <body>
-    <div class="full-bg"></div>
+    <div class="image-container">
+        <img src="img/cover.jpg" alt="圖片 1">
+        <img src="img/cover.jpg" alt="圖片 2">
+        <img src="img/cover.jpg" alt="圖片 3">
+        <img src="img/cover.jpg" alt="圖片 4">
+    </div>
 </body>
 </html>
