@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滿版圖片網站（支援 RWD）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .full-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('img/pexels-pripicart-620337.jpg') no-repeat center center;
+            background-size: cover;
+        }
+    </style>
+    <script>
+        // 禁用右鍵
+        document.addEventListener("contextmenu", (event) => event.preventDefault());
+
+        // 禁用開發者工具 (F12、Ctrl+Shift+I、Ctrl+U)
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "F12" || 
+                (event.ctrlKey && event.shiftKey && event.key === "I") || 
+                (event.ctrlKey && event.key === "U")) {
+                event.preventDefault();
+            }
+        });
+
+        // 禁止手機長按圖片
+        document.addEventListener("touchstart", (event) => {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+</head>
+<body>
+    <div class="full-bg"></div>
+</body>
+</html>
